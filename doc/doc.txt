@@ -1,0 +1,55 @@
+WebServices Moodle
+
+- Habilitar o Serviço Web
+    Admin -> Recursos Avançados
+
+- Habilitar o Protocolo
+    Admin -> Plugin -> Serviço Web -> Gerenciar Protocolo
+
+--------------------------------------
+Criar um papel
+   Usuários de serviços web (web_services_users)
+Criar o Usuário e Vincular ao Papel
+--------------------------------------
+
+- Criar o Serviço Externo e vincular o Usuário
+    Admin -> Plugin -> Serviço Web -> Serviços Externo
+
+    DRM (funções do serviço)
+    core_user_create_users
+    core_course_get_courses_by_field
+    core_user_get_users
+    enrol_manual_enrol_users
+
+- Gerar um Token para o Serviço Externo criado;
+    Admin -> Plugin -> Serviço Web -> Gerenciar Tokens
+
+- Testando o Cliente de Serviço Web (Moodle)
+   Função (core_webservice_get_site_info)
+   http://localhost/moodle/admin/webservice/testclient.php;
+
+- Json (Estrutura)
+
+DRM
+{
+ "username"  :       "guilherme",
+ "password"  :       "Mudar1234$",
+ "firstname" :       "api",
+ "lastname"  :       "api",
+ "idnumber"  :       "11111111111",
+ "email"     :       "guilherme@gmail.com",
+ "shortname" :       "curso-um"
+}
+
+debuginfo - Habilitado de retorno
+
+Curso tem que está com a inscrição manual;
+
+
+SELECT  ucb.cod_externo AS 'DRM', c.fullname AS 'disciplinas', c.id AS 'id_ucb'
+			FROM mdl_course c
+                 INNER JOIN mdl_ucb_externo_interno ucb ON c.id = ucb.cod_interno
+WHERE ucb.cod_externo = "ADMIN";
+
+
+token = "8e24e1907512dda89089de007ce1bd73";
